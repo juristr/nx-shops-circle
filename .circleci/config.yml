@@ -5,9 +5,13 @@ jobs:
     docker:
       - image: cimg/node:lts-browsers
     steps:
+      - checkout
       - run:
-          name: Print a message
-          command: echo "Hello Circle CI!"
+          name: install dependencies
+          command: pnpm install --frozen-lockfile
+      - run:
+          name: Run build
+          command: pnpm nx build cart
 
 workflows:
   version: 2
