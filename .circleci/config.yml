@@ -6,9 +6,19 @@ jobs:
       - image: cimg/node:lts-browsers
     steps:
       - checkout
+      # look for existing cache and restore if found
+      - restore_cache:
+          key: npm-dependencies-{{ checksum "pnpm-lock.yaml" }}
+      # install dependencies
       - run:
           name: install dependencies
           command: pnpm install --frozen-lockfile
+      # save any changes to the cache
+      - save_cache:
+          key: npm-dependencies-{{ checksum "pnpm-lock.yaml" }}
+          paths:
+            - node_modules
+            - ~/.cache/Cypress # needed for the Cypress binary
       - run:
           name: Run build
           command: pnpm nx build cart
