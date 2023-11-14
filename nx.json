@@ -1,13 +1,13 @@
 {
-  "affected": {
-    "defaultBase": "origin/main"
-  },
   "cli": {
     "warnings": {
       "versionMismatch": false
     },
     "packageManager": "yarn",
     "analytics": false
+  },
+  "affected": {
+    "defaultBase": "origin/main"
   },
   "generators": {
     "@nx/angular:application": {
